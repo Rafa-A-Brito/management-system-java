@@ -5,11 +5,11 @@ import java.time.format.ResolverStyle;
 import java.util.Scanner;
 
 public class Main{
-    public static void main(String[]args) {
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("==================================");
-        System.out.println("Gerenciamento de Tarefas Empresariais \uD83D\uDE0E");
+        System.out.println("Gerenciamento de Tarefas Empresariais \uD83C\uDFE2)");
         System.out.println("==================================");
 
         System.out.print("Informe o nome da empresa: ");
@@ -27,7 +27,6 @@ public class Main{
         task3.showData();
         task4.showData();
         task5.showData();
-
         scanner.close();
     }
 
@@ -35,10 +34,11 @@ public class Main{
         private static String readStatus(Scanner scanner) {
             String status;
             while (true) {
-                System.out.print("Status (Concluída/Pendente): ");
+                System.out.print("Status (Concluída/Em preparo/Pendente): ");
                 status = scanner.nextLine();
 
-                if (status.equalsIgnoreCase("Concluída") || status.equalsIgnoreCase("Pendente")) {
+                if (status.equalsIgnoreCase("Concluída") || status.equalsIgnoreCase("Pendente")
+                        || status.equalsIgnoreCase("Em preparo")) {
                     break;
                 } else {
                     System.out.println("⚠️ Status inválido! Digite novamente.");                }
@@ -48,7 +48,6 @@ public class Main{
 
         // Auxiliar method to create tasks by the scan of each other
         public static Tasks createTask(Scanner scanner, int id_task, String enterprise_name) {
-
 
             System.out.println("\n--- Cadastro da Tarefa " + id_task + " ---");
 
@@ -88,7 +87,6 @@ public class Main{
             if (changedStatus.equalsIgnoreCase("Sim")) {
                 status = readStatus(scanner);
             }
-
             return new Tasks(description, time_limit, status, manager, section, enterprise_name, id_manager, id_task);
         }
     }

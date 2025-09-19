@@ -2,7 +2,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 // Atributtes of class tasks
-
 public class Tasks {
     private String description;
     private LocalDate time_limit;
@@ -32,6 +31,18 @@ public class Tasks {
         this.enterprise_name = enterprise_name;
         this.id_manager = id_manager;
         this.id_task = id_task;
+    }
+
+    // Constructor of Tasks
+    public Tasks() {
+        this.description = "";
+        this.time_limit = null;
+        this.status = "";
+        this.manager = "";
+        this.section = "";
+        this.enterprise_name = "";
+        this.id_manager = 0;
+        this.id_task = 0;
     }
 
     // Getters
@@ -86,9 +97,9 @@ public class Tasks {
 
     public void setEnterpriseNae(String _entname){this.enterprise_name = _entname;}
 
-    public void setIdManager(int _idmng){
-        this.id_manager = _idmng;
-    }
+    public void setIdManager(int _idmng){this.id_manager = _idmng;}
+
+    public void setIdTask(int _idtask){this.id_task = _idtask;}
 
 
     // MostraDados() method in English
