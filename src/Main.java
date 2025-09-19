@@ -1,7 +1,7 @@
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.Scanner;
 
 public class Main{
@@ -12,12 +12,14 @@ public class Main{
         System.out.println("Gerenciamento de Tarefas Empresariais \uD83D\uDE0E");
         System.out.println("==================================");
 
+        System.out.print("Informe o nome da empresa: ");
+        String enterprise_name = scanner.nextLine();
 
-        Tasks task1 = createTask(scanner, 1);
-        Tasks task2 = createTask(scanner, 2);
-        Tasks task3 = createTask(scanner, 3);
-        Tasks task4 = createTask(scanner, 4);
-        Tasks task5 = createTask(scanner, 5);
+        Tasks task1 = createTask(scanner, 1, enterprise_name);
+        Tasks task2 = createTask(scanner, 2, enterprise_name);
+        Tasks task3 = createTask(scanner, 3, enterprise_name);
+        Tasks task4 = createTask(scanner, 4, enterprise_name);
+        Tasks task5 = createTask(scanner, 5, enterprise_name);
 
         //Show data of the assigned tasks
         task1.showData();
@@ -33,21 +35,22 @@ public class Main{
         private static String readStatus(Scanner scanner) {
             String status;
             while (true) {
-                System.out.print("Digite o status (Concluída/Pendente): ");
+                System.out.print("Status (Concluída/Pendente): ");
                 status = scanner.nextLine();
 
                 if (status.equalsIgnoreCase("Concluída") || status.equalsIgnoreCase("Pendente")) {
                     break;
                 } else {
-                    System.out.println("⚠️ Status inválido! Digite apenas 'Concluída' ou 'Pendente'.");
-                }
+                    System.out.println("⚠️ Status inválido! Digite novamente.");                }
             }
             return status;
         }
 
         // Auxiliar method to create tasks by the scan of each other
-        public static Tasks createTask(Scanner scanner, int numero) {
-            System.out.println("\n--- Cadastro da Tarefa " + numero + " ---");
+        public static Tasks createTask(Scanner scanner, int id_task, String enterprise_name) {
+
+
+            System.out.println("\n--- Cadastro da Tarefa " + id_task + " ---");
 
             System.out.print("Descrição: ");
             String description = scanner.nextLine();
@@ -62,23 +65,30 @@ public class Main{
             System.out.print("Seção/Área da empresa: ");
             String section = scanner.nextLine();
 
-            DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            System.out.print("Prazo limite (dia/mês/ano): ");
-            String stringDate = scanner.nextLine();
+            DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/uuuu").withResolverStyle(ResolverStyle.STRICT);
+            LocalDate time_limit;
 
-            LocalDate time_limit = LocalDate.parse(stringDate, dateFormat);
+            while (true) {
+                System.out.print("Prazo limite (dd/MM/yyyy): ");
+                String stringDate = scanner.nextLine().trim();
 
-            System.out.print("Status inicial (Concluída/Pendente): ");
+                try {
+                    time_limit = LocalDate.parse(stringDate, dateFormat);
+                    break;
+                } catch (DateTimeParseException e) {
+                    System.out.println("Data inválida! Digite novamente no formato dd/MM/yyyy.");
+                }
+            }
+
             String status = readStatus(scanner);
 
             System.out.print("Deseja mudar o status (Sim/Não)? ");
             String changedStatus = scanner.nextLine();
 
             if (changedStatus.equalsIgnoreCase("Sim")) {
-                System.out.print("Novo status (Concluída/Pendente): ");
                 status = readStatus(scanner);
             }
 
-            return new Tasks(description, time_limit, status, manager, section, id_manager);
+            return new Tasks(description, time_limit, status, manager, section, enterprise_name, id_manager, id_task);
         }
     }

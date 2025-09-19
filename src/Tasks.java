@@ -10,15 +10,28 @@ public class Tasks {
     private String manager;
     private String section;
     private int id_manager;
+    private String enterprise_name;
+    private int id_task;
 
     // Method "Tasks" to get the private atrributes for Main
-    public Tasks(String description, LocalDate time_limit, String status, String manager, String section, int id_manager) {
+    public Tasks(
+            String description,
+            LocalDate time_limit,
+            String status,
+            String manager,
+            String section,
+            String enterprise_name,
+            int id_manager,
+            int id_task)
+    {
         this.description = description;
         this.time_limit = time_limit;
         this.status = status;
         this.manager = manager;
         this.section = section;
+        this.enterprise_name = enterprise_name;
         this.id_manager = id_manager;
+        this.id_task = id_task;
     }
 
     // Getters
@@ -34,6 +47,10 @@ public class Tasks {
     public String getStatus() {
         return this.status;
     }
+
+    public int getIdTask() {return this.id_task;}
+
+    public String getEnterpriseName() {return this.enterprise_name;}
 
     public String getManager() {
         return this.manager;
@@ -67,36 +84,27 @@ public class Tasks {
         this.section = _sect;
     }
 
+    public void setEnterpriseNae(String _entname){this.enterprise_name = _entname;}
+
     public void setIdManager(int _idmng){
         this.id_manager = _idmng;
     }
 
 
     // MostraDados() method in English
-    public void showData(){
+        public void showData(){
 
-        System.out.println("==============================================");
-        System.out.println("Relatório do Gerenciamento:");
-        System.out.println("Responsável pela Tarefa: " + this.getManager());
-        System.out.println("Identificação do Resposável (ID): " + this.getIdManager());
-        System.out.println("Tarefa a ser designada: " + this.getDescription());
-        System.out.println("Seção / Área da empresa: " + this.getSection());
-        System.out.println("Prazo limite para realização:  " + this.getFormattedDate());
-        System.out.println("Status da tarefa (concluída/pendente): " + this.getStatus());
-        System.out.println("==============================================");
-    }
-
-    // MudarStatus() method in English
-    public void changeStatus(String newStatus) {
-        switch (newStatus) {
-            case "Concluída":
-            case "Pendente":
-                this.status = newStatus;
-                System.out.println("Status alterado para: " + this.status);
-                break;
-            default:
-                System.out.println("A alteração não foi possível de realizar! \nOpção inexistente.");
+            System.out.println("\n==============================================");
+            System.out.println("Relatório do Gerenciamento: Empresa " + this.getEnterpriseName());
+            System.out.println("Número da Tarefa: " + this.getIdTask());
+            System.out.println("Responsável pela Tarefa: " + this.getManager());
+            System.out.println("Identificação do Resposável (ID): " + this.getIdManager());
+            System.out.println("Tarefa a ser designada: " + this.getDescription());
+            System.out.println("Seção / Área da empresa: " + this.getSection());
+            System.out.println("Prazo limite para realização:  " + this.getFormattedDate());
+            System.out.println("Status da tarefa (concluída/pendente): " + this.getStatus());
+            System.out.println("==============================================");
         }
-    }
+
 }
 
