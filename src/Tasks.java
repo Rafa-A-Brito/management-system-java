@@ -11,7 +11,7 @@ public class Tasks {
     private String section;
     private int id_manager;
     private String enterprise_name;
-    private int id_task;
+    int id_task;
 
     // Method "Tasks" to get the private atrributes for Main
     public Tasks(
