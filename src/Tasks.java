@@ -111,7 +111,7 @@ public class Tasks {
             System.out.println("Responsável pela Tarefa: " + this.getManager());
             System.out.println("Identificação do Resposável (ID): " + this.getIdManager());
             System.out.println("Tarefa a ser designada: " + this.getDescription());
-            System.out.println("Seção / Área da empresa: " + this.getSection());
+            System.out.println("Seção/Área da empresa: " + this.getSection());
             System.out.println("Prazo limite para realização:  " + this.getFormattedDate());
             System.out.println("Status da tarefa (concluída/pendente): " + this.getStatus());
             System.out.println("==============================================");

@@ -34,7 +34,7 @@ public class Main{
         private static String readStatus(Scanner scanner) {
             String status;
             while (true) {
-                System.out.print("Status (Concluída/Em preparo/Pendente): ");
+                System.out.print("Status (Concluída/Em andamento/Pendente): ");
                 status = scanner.nextLine();
 
                 if (status.equalsIgnoreCase("Concluída") || status.equalsIgnoreCase("Pendente")
