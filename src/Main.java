@@ -17,17 +17,17 @@ public class Main{
 
         Tasks task1 = createTask(scanner, 1, enterprise_name);
         Tasks task2 = createTask(scanner, 2, enterprise_name);
-        Tasks task3 = createTask(scanner, 3, enterprise_name);
+       /* Tasks task3 = createTask(scanner, 3, enterprise_name);
         Tasks task4 = createTask(scanner, 4, enterprise_name);
-        Tasks task5 = createTask(scanner, 5, enterprise_name);
+        Tasks task5 = createTask(scanner, 5, enterprise_name); */
 
         //Show data of the assigned tasks
         task1.showData();
         task2.showData();
-        task3.showData();
+       /* task3.showData();
         task4.showData();
         task5.showData();
-        scanner.close();
+        scanner.close();*/
     }
 
         // Auxiliar method to read and validate the status
@@ -38,12 +38,24 @@ public class Main{
                 status = scanner.nextLine();
 
                 if (status.equalsIgnoreCase("Concluída") || status.equalsIgnoreCase("Pendente")
-                        || status.equalsIgnoreCase("Em preparo")) {
+                        || status.equalsIgnoreCase("Em andamento")) {
                     break;
                 } else {
                     System.out.println("⚠️ Status inválido! Digite novamente.");                }
             }
             return status;
+        }
+
+        // Change status method
+        private static String changeStatus(Scanner scanner, String currentStatus) {
+            System.out.println("Status atual: " + currentStatus);
+            System.out.print("Deseja mudar o status (Sim/Não)? ");
+            String answer = scanner.nextLine().trim();
+
+            if (answer.equalsIgnoreCase("Sim")) {
+                return readStatus(scanner);
+            }
+            return currentStatus;
         }
 
         // Auxiliar method to create tasks by the scan of each other
@@ -81,12 +93,8 @@ public class Main{
 
             String status = readStatus(scanner);
 
-            System.out.print("Deseja mudar o status (Sim/Não)? ");
-            String changedStatus = scanner.nextLine();
+            status = changeStatus(scanner, status);
 
-            if (changedStatus.equalsIgnoreCase("Sim")) {
-                status = readStatus(scanner);
-            }
             return new Tasks(description, time_limit, status, manager, section, enterprise_name, id_manager, id_task);
         }
     }
